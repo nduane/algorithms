@@ -14,9 +14,8 @@ int max_sum_sub_array_order_n(const int* values, unsigned int size,
 	int cur_sum = 0;
 	unsigned int cur_start = 0;
 	unsigned int cur_end = 0;
-	unsigned int i;
 
-	for (i = 0; i < size; ++i)
+	for (unsigned int i = 0; i < size; ++i)
 		{
 
 		// Get current running sum.
@@ -61,16 +60,14 @@ int max_sum_sub_array_order_n_squared(const int* values, unsigned int size,
 	int max_sum = INT_MIN;
 	unsigned int max_start = 0;
 	unsigned int max_end = 0;
-	unsigned int i;
-	unsigned int j;
 
-	for (i = 0; i < size; ++i)
+	for (unsigned int i = 0; i < size; ++i)
 		{
 		int cur_sum = 0;
 
 		// Calculate all sums which start from k.
 
-		for (j = i; j < size; ++j)
+		for (unsigned int j = i; j < size; ++j)
 			{
 			cur_sum += values[j];
 
@@ -98,36 +95,30 @@ void main(int argc, char* argv[])
 {
 //	int values[] = {30, -25, -6, 8, 23, 0};
 	int values[128 * 1024];
-	int sum;
-	unsigned int start;
-	unsigned int end;
-	unsigned int i;
-	time_t start_time;
-	time_t end_time;
 
 	// Initialize values.
 
 	srand(1313);
-	for (i = 0; i < DIMENSION_OF(values); ++i)
-		{
+	for (unsigned int i = 0; i < DIMENSION_OF(values); ++i)
 		values[i] = (rand() % 2000) - 1000;
-		}
 
 	// Order n squared first.
 
-	start_time = time(NULL);
-	sum = max_sum_sub_array_order_n_squared(values, DIMENSION_OF(values),
-			&start, &end);
-	end_time = time(NULL);
+	time_t start_time = time(NULL);
+	unsigned int start_index;
+	unsigned int end_index;
+	int sum = max_sum_sub_array_order_n_squared(values, DIMENSION_OF(values),
+			&start_index, &end_index);
+	time_t end_time = time(NULL);
 	printf("order nsquared, max sum: %d, start: %d, end: %d, duration: %ld\n",
-			sum, start, end, (long) (end_time - start_time));
+			sum, start_index, end_index, (long) (end_time - start_time));
 
 	// Order n.
 
 	start_time = time(NULL);
 	sum = max_sum_sub_array_order_n(values, DIMENSION_OF(values),
-			&start, &end);
+			&start_index, &end_index);
 	end_time = time(NULL);
 	printf("order n, max sum: %d, start: %d, end: %d, duration: %ld\n",
-			sum, start, end, (long) (end_time - start_time));
+			sum, start_index, end_index, (long) (end_time - start_time));
 }
