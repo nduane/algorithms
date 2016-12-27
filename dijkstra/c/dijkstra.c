@@ -3,6 +3,7 @@
 #include <string.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define DIMENSION_OF(a) (sizeof(a) / sizeof(a[0]))
 
@@ -36,7 +37,7 @@ int distance_compare(const void* elem1, const void* elem2,
 // use zero to indicate no path between the verticies.  This means
 // the actual length is the distance value minus 1.
 
-unsigned int dijkstra_shortest_paths(const unsigned int* graph,
+bool dijkstra_shortest_paths(const unsigned int* graph,
 		unsigned int n, unsigned int start, unsigned int end,
 		unsigned int *paths)
 {
@@ -103,7 +104,7 @@ unsigned int dijkstra_shortest_paths(const unsigned int* graph,
 	// If no path found then return null.
 		
 	if (distance[end] == UINT_MAX)
-		return 0;
+		return false;
 			
 	else
 		{
@@ -115,8 +116,9 @@ unsigned int dijkstra_shortest_paths(const unsigned int* graph,
 		// Flags to tell whether we already handled a vertex when
 		// generating the paths (eg. backtracing).
 			
-		unsigned int handledVertex[n];
-		memset(handledVertex, 0, sizeof(handledVertex));
+		bool handled_vertex[n];
+		for (unsigned int i = 0; i < n; ++i)
+			handled_vertex[i] = false;
 
 		// Vertexes queue used when determining the paths.
 			
@@ -161,10 +163,10 @@ unsigned int dijkstra_shortest_paths(const unsigned int* graph,
 						// If we didn't handle this incoming vertex already
 						// add it to the queue.
 							
-						if (handledVertex[i] == 0)
+						if (handled_vertex[i] == false)
 							{
 							vertexes[avail++] = i;
-							handledVertex[i] = !0;
+							handled_vertex[i] = true;
 							}
 						}
 					}
@@ -175,7 +177,7 @@ unsigned int dijkstra_shortest_paths(const unsigned int* graph,
 			cur++;
 			}
 
-		return !0;
+		return true;
 		}
 }
 	
@@ -248,10 +250,10 @@ void main(int argc, char* argv[])
 		
 	// Calculate shortest path(s).
 		
-	unsigned int found = dijkstra_shortest_paths(&graph[0][0],
+	bool found = dijkstra_shortest_paths(&graph[0][0],
 			DIMENSION_OF(graph), start, end, &paths[0][0]);
 
-	if (found == 0)
+	if (found == false)
 		printf("No paths found from %d to %d", start, end);
 	else
 		{
