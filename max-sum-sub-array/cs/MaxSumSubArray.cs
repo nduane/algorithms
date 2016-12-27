@@ -3,21 +3,21 @@ using System.Diagnostics;
 
 public class Application
 {
-	private static int MaxSumSubArrayOrderN(int[] values, out int start,
-			out int end)
+	private static int MaxSumSubArrayOrderN(int[] values, out uint start,
+			out uint end)
 	{
 		start = end = 0;
 		int maxSum = int.MinValue;
 		int curSum = 0;
-		int curStart = 0;
-		int curEnd = 0;
+		uint curStart = 0;
+		uint curEnd = 0;
 
-		for (int j = 0; j < values.Length; ++j)
+		for (uint i = 0; i < (uint) values.Length; ++i)
 			{
 
 			// Get current running sum.
 
-			curSum += values[j];
+			curSum += values[i];
 
 			// If greater than max or equal to it with a shorter length,
 			// record the sum and the start/end indexes.
@@ -38,8 +38,8 @@ public class Application
 			else if (curSum <= 0)
 				{
 				curSum = 0;
-				curStart = j + 1;
-				curEnd = j;
+				curStart = i + 1;
+				curEnd = i;
 				}
 
 			curEnd++;
@@ -48,32 +48,32 @@ public class Application
 		return maxSum;
 	}
 
-	private static int MaxSumSubArrayOrderNSquared(int[] values, out int start,
-			out int end)
+	private static int MaxSumSubArrayOrderNSquared(int[] values, out uint start,
+			out uint end)
 	{
 		int maxSum = int.MinValue;
 
 		start = end = 0;
-		for (int j = 0; j < values.Length; ++j)
+		for (uint i = 0; i < values.Length; ++i)
 			{
 			int curSum = 0;
 
 			// Calculate all sums which start from k.
 
-			for (int k = j; k < values.Length; ++k)
+			for (uint j = i; j < (uint) values.Length; ++j)
 				{
-				curSum += values[k];
+				curSum += values[j];
 
 				// If greater than max or equal to it with a shorter length,
 				// record the sum and the start/end indexes.
 
 				if (curSum >= maxSum)
 					{
-					if ((curSum != maxSum) || ((k - j) < (end - start)))
+					if ((curSum != maxSum) || ((j - i) < (end - start)))
 						{
 						maxSum = curSum;
-						start = j;
-						end = k;
+						start = i;
+						end = j;
 						}
 					}
 				}
@@ -90,13 +90,13 @@ public class Application
 		// Initialize values.
 
 		Random random = new Random();
-		for (int j = 0; j < values.Length; ++j)
+		for (uint i = 0; i < values.Length; ++i)
 			{
-			values[j] = random.Next(-1000, 1000);
+			values[i] = random.Next(-1000, 1000);
 			}
 
-		int start;
-		int end;
+		uint start;
+		uint end;
 
 		// Order n squared first.
 
