@@ -48,7 +48,7 @@ public static class Dijkstra
 		// the shortest path.
 		
 		uint[] distance = new uint[graph.GetLength(0)];
-		for (int i = 0; i < distance.Length; ++i)
+		for (uint i = 0; i < (uint) distance.Length; ++i)
 			distance[i] = uint.MaxValue;
 
 		// Set the distance of our start vertex to zero.  This will cause it to
@@ -59,8 +59,8 @@ public static class Dijkstra
 		// This queue initially contains all the indexes.
 		
 		uint[] queue = new uint[distance.Length];
-		for (int i = 0; i < queue.Length; ++i)
-			queue[i] = (uint) i;
+		for (uint i = 0; i < (uint) queue.Length; ++i)
+			queue[i] = i;
 		int head = 0;
 		
 		IComparer distanceCompare = new DistanceCompare(distance);
@@ -85,7 +85,7 @@ public static class Dijkstra
 			// Check each neighbor of vertex and see if we need to update
 			// the distance to that neighbor.
 
-			for (int i = 0; i < graph.GetLength(0); ++i)
+			for (uint i = 0; i < (uint) graph.GetLength(0); ++i)
 				{
 				
 				// Is this a neighbor?
@@ -113,11 +113,11 @@ public static class Dijkstra
 			// paths.  Initialize all edges to 0 (meaning no path).
 			
 			uint[,] paths = new uint[graph.GetLength(0), graph.GetLength(1)];
-			for (int i = 0; i < graph.GetLength(0); ++i)
+			for (uint i = 0; i < (uint) graph.GetLength(0); ++i)
 				{
-				for (int k = 0; k < graph.GetLength(1); ++k)
+				for (uint j = 0; j < graph.GetLength(1); ++j)
 					{
-					paths[i, k] = 0;
+					paths[i, j] = 0;
 					}
 				}
 
@@ -125,7 +125,7 @@ public static class Dijkstra
 			// generating the paths (eg. backtracing).
 			
 			bool[] handledVertex = new bool[graph.GetLength(0)];
-			for (int i = 0; i < handledVertex.Length; ++i)
+			for (uint i = 0; i < (uint) handledVertex.Length; ++i)
 				handledVertex[i] = false;
 
 			// Vertexes queue used when determining the paths.
@@ -140,7 +140,7 @@ public static class Dijkstra
 			
 			while (cur != avail)
 				{
-				for (uint i = 0; i < graph.GetLength(0); ++i)
+				for (uint i = 0; i < (uint) graph.GetLength(0); ++i)
 					{
 
 					// Rows in the graph indicate outgoing edges from the vertex.
