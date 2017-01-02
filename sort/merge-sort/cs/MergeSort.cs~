@@ -1,0 +1,21 @@
+0 5
+
+
+0 6
+
+public static class MergeSort
+{
+	public static void Sort(Array a, uint start, uint end, Compare compare)
+	{
+		if (start < end)
+			{
+			Sort(a, start, (end - start) / 2, compare);
+			Sort(a, (end - start) / 2 + 1, end, compare);
+			}
+	}
+
+	public static void Sort(Array a, Compare compare)
+	{
+		return Sort(a, 0, a.Length - 1, compare);
+	}
+}
