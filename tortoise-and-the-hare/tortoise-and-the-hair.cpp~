@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+	int val;
+	node *next;
+
+	node(int val)
+	{
+		this->val = val;
+		this->next = nullptr;
+	}
+};
+
+bool cycle(node* n)
+{
+	if (n == nullptr)
+		return false;
+
+	node* tortoise = n;
+	node* hare = n;
+	while (true)
+		{
+
+		// Move tortoise one node ahead.
+		
+		tortoise = tortoise->next;
+
+		// Move hare two nodes ahead.
+		
+		hare = hare->next;
+		if (hare != nullptr)
+			hare = hare->next;
+
+		// If we hit a null then there's not a cycle.
+		
+		if (hare == nullptr)
+			break;
+
+		// If the tortoise and hare meet then we must have a cycle.
+		
+		if (tortoise == hare)
+			break;
+		}
+
+	// We break out of the loop when either the hare has hit the
+	// end of the list, eg. nullptr, or the hare and tortoise point
+	// to the same node.
+	
+	return (hare == nullptr) ? false : true;
+}
+
+int main()
+{
+}
