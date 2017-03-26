@@ -3,7 +3,9 @@ using namespace std;
 
 // Tortoise and hare algoritm for detecting cycles in data structures.  I
 // came upon this algorithm in Kent Dybvig's "The Scheme Programming Language"
-// book.
+// book.  Wikipedia credits the algorithm to Robert W. Floyd:
+//
+// https://en.wikipedia.org/wiki/Cycle_detection
 
 // A simple single linked list node.
 
