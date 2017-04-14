@@ -91,7 +91,7 @@ int max_sum_sub_array_order_n_squared(const int* values, unsigned int size,
 	return max_sum;
 }
 
-void main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 //	int values[] = {30, -25, -6, 8, 23, 0};
 	int values[128 * 1024];
@@ -121,4 +121,5 @@ void main(int argc, char* argv[])
 	end_time = time(NULL);
 	printf("order n, max sum: %d, start: %d, end: %d, duration: %ld\n",
 			sum, start_index, end_index, (long) (end_time - start_time));
+	return 0;
 }
