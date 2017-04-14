@@ -36,10 +36,10 @@ int max_sum_sub_array_order_n(const int* values, unsigned int size,
 				}
 			}
 
-		// Else if our sum as gone to less than or equal to zero
-		// then we can start a new running sum at the next index.
+		// If our sum as gone to less than or equal to zero then we can
+		// start a new running sum at the next index.
 
-		else if (cur_sum <= 0)
+		if (cur_sum <= 0)
 			{
 			cur_sum = 0;
 			cur_start = i + 1;
@@ -94,6 +94,10 @@ int max_sum_sub_array_order_n_squared(const int* values, unsigned int size,
 int main(int argc, char* argv[])
 {
 //	int values[] = {30, -25, -6, 8, 23, 0};
+//	int values1[] = {-30, -40, -50, -60, -7, -3, -100, -30, -70};
+//	int values2[] = {-30, -40, -50, -60, -7, -3, 20, -19, 1, -3};
+//	int values3[] = {-30, -40, -50, -60, -7, -3, 20, -19, 1, 19, -10};
+
 	int values[128 * 1024];
 
 	// Initialize values.
@@ -121,5 +125,56 @@ int main(int argc, char* argv[])
 	end_time = time(NULL);
 	printf("order n, max sum: %d, start: %d, end: %d, duration: %ld\n",
 			sum, start_index, end_index, (long) (end_time - start_time));
+/*
+	time_t start_time = time(NULL);
+	unsigned int start_index;
+	unsigned int end_index;
+	int sum = max_sum_sub_array_order_n_squared(values1, DIMENSION_OF(values1),
+			&start_index, &end_index);
+	time_t end_time = time(NULL);
+	printf("1: order nsquared, max sum: %d, start: %d, end: %d, duration: %ld\n",
+			sum, start_index, end_index, (long) (end_time - start_time));
+
+	// Order n.
+
+	start_time = time(NULL);
+	sum = max_sum_sub_array_order_n(values1, DIMENSION_OF(values1),
+			&start_index, &end_index);
+	end_time = time(NULL);
+	printf("1: order n, max sum: %d, start: %d, end: %d, duration: %ld\n",
+			sum, start_index, end_index, (long) (end_time - start_time));
+
+	start_time = time(NULL);
+	sum = max_sum_sub_array_order_n_squared(values2, DIMENSION_OF(values2),
+			&start_index, &end_index);
+	end_time = time(NULL);
+	printf("2: order nsquared, max sum: %d, start: %d, end: %d, duration: %ld\n",
+			sum, start_index, end_index, (long) (end_time - start_time));
+
+	// Order n.
+
+	start_time = time(NULL);
+	sum = max_sum_sub_array_order_n(values2, DIMENSION_OF(values2),
+			&start_index, &end_index);
+	end_time = time(NULL);
+	printf("2: order n, max sum: %d, start: %d, end: %d, duration: %ld\n",
+			sum, start_index, end_index, (long) (end_time - start_time));
+
+	start_time = time(NULL);
+	sum = max_sum_sub_array_order_n_squared(values3, DIMENSION_OF(values3),
+			&start_index, &end_index);
+	end_time = time(NULL);
+	printf("3: order nsquared, max sum: %d, start: %d, end: %d, duration: %ld\n",
+			sum, start_index, end_index, (long) (end_time - start_time));
+
+	// Order n.
+
+	start_time = time(NULL);
+	sum = max_sum_sub_array_order_n(values3, DIMENSION_OF(values3),
+			&start_index, &end_index);
+	end_time = time(NULL);
+	printf("3: order n, max sum: %d, start: %d, end: %d, duration: %ld\n",
+			sum, start_index, end_index, (long) (end_time - start_time));
+*/	
 	return 0;
 }
