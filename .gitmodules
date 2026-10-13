@@ -1,0 +1,6 @@
+[submodule "sorting/quick-sort"]
+	path = sorting/quick-sort
+	url = git@github.com:nduane/quick-sort.git
+[submodule "sorting/merge-sort"]
+	path = sorting/merge-sort
+	url = git@github.com:nduane/merge-sort.git
